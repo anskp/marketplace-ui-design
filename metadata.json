@@ -1,0 +1,6 @@
+{
+  "name": "COPYM RWA Tokenization Platform",
+  "description": "Institutional-grade Real World Asset (RWA) fractional tokenization marketplace, portfolio wallet, Verifiable Credentials, and Fireblocks custodial transaction dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
