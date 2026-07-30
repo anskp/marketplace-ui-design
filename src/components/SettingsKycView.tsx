@@ -18,6 +18,8 @@ import {
   ChevronRight,
   Shield,
   Download,
+  Globe,
+  Globe2,
 } from 'lucide-react';
 
 interface SettingsKycViewProps {
@@ -25,6 +27,7 @@ interface SettingsKycViewProps {
   onOpenKycModal: () => void;
   onUpdateProfile: (updated: Partial<UserProfile>) => void;
   transactions?: TxLog[];
+  onNavigateToCarbonRegistry: () => void;
 }
 
 export const SettingsKycView: React.FC<SettingsKycViewProps> = ({
@@ -32,10 +35,14 @@ export const SettingsKycView: React.FC<SettingsKycViewProps> = ({
   onOpenKycModal,
   onUpdateProfile,
   transactions = [],
+  onNavigateToCarbonRegistry,
 }) => {
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [saved, setSaved] = useState(false);
+
+  // Settings Sub-Tab: 'account' | 'carbon_registries'
+  const [settingsTab, setSettingsTab] = useState<'account' | 'carbon_registries'>('account');
 
   // Security Sub-states
   const [currentPassword, setCurrentPassword] = useState('');
@@ -107,7 +114,7 @@ export const SettingsKycView: React.FC<SettingsKycViewProps> = ({
           <div>
             <h2 className="text-xl font-black text-slate-900">Account Settings & Compliance Hub</h2>
             <p className="text-xs text-slate-500">
-              Manage 2FA, Password Reset, KYC Tier, W3C DID, Soulbound Tokens, Notifications & On-Chain Audit History
+              Manage 2FA, Password Reset, KYC Tier, Carbon Credit Registries, W3C DID, Soulbound Tokens & Audit Logs
             </p>
           </div>
         </div>
@@ -118,6 +125,27 @@ export const SettingsKycView: React.FC<SettingsKycViewProps> = ({
         >
           <span>{showMoreSettings ? 'Show Less' : 'Show More Settings'}</span>
           <ChevronRight className={`w-4 h-4 transition-transform ${showMoreSettings ? 'rotate-90' : ''}`} />
+        </button>
+      </div>
+
+      {/* Sub-Tab Navigation Bar */}
+      <div className="flex flex-wrap items-center gap-3 border-b border-slate-200/80 pb-2">
+        <button
+          className="px-4 py-2.5 rounded-xl font-bold text-xs transition cursor-pointer flex items-center space-x-2 bg-slate-900 text-white shadow-xs"
+        >
+          <User className="w-4 h-4" />
+          <span>Account & Compliance</span>
+        </button>
+
+        <button
+          onClick={onNavigateToCarbonRegistry}
+          className="px-4 py-2.5 rounded-xl font-bold text-xs transition cursor-pointer flex items-center space-x-2 bg-white hover:bg-emerald-50 text-slate-800 border border-slate-200"
+        >
+          <Globe className="w-4 h-4 text-emerald-500" />
+          <span>Carbon Credit Registries</span>
+          <span className="bg-emerald-100 text-emerald-800 text-[10px] font-mono px-2 py-0.5 rounded-full font-extrabold">
+            CAD TRUST MAP
+          </span>
         </button>
       </div>
 

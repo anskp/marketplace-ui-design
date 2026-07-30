@@ -16,6 +16,7 @@ import { AssetDetailModal } from './components/AssetDetailModal';
 import { TxDrawer } from './components/TxDrawer';
 import { KycModal } from './components/KycModal';
 import { SearchModal } from './components/SearchModal';
+import { CarbonRegistryExplorer } from './components/CarbonRegistryExplorer';
 
 export default function App() {
   // Global Application State
@@ -306,12 +307,17 @@ export default function App() {
             <VcCredentialsView user={user} assets={assets} />
           )}
 
+          {activeTab === 'carbon_registries' && (
+            <CarbonRegistryExplorer />
+          )}
+
           {activeTab === 'settings' && (
             <SettingsKycView
               user={user}
               onOpenKycModal={() => setIsKycModalOpen(true)}
               onUpdateProfile={(updated) => setUser((prev) => ({ ...prev, ...updated }))}
               transactions={transactions}
+              onNavigateToCarbonRegistry={() => setActiveTab('carbon_registries')}
             />
           )}
         </main>
